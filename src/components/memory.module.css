@@ -1,0 +1,27 @@
+.memory {
+  width: 100%;
+  height: 1000px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+}
+.card {
+  width: 200px;
+  height: 200px;
+  padding: 20px;
+  border: solid 2px #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image {
+  width: 150px;
+  height: 150px;
+}
