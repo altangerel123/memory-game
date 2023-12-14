@@ -1,20 +1,35 @@
-import styles from "./memory.module.css";
+import Image from "next/image";
+import styles from "./Card.module.css";
+import { useGame } from "./Game";
 
-export default function Card(props) {
+export const Card = ({ id, value, src }) => {
+  const { flipped, setFlipped, isRunning, solved } = useGame();
+
+  const isFlipped = flipped.includes(id);
+
+  const isSolved = solved.includes(id);
+
+  const handleClick = () => {
+    if (isFlipped || !isRunning || isSolved) {
+      return;
+    }
+
+    setFlipped((flipped) => {
+      if (flipped.length === 2) {
+        return [id];
+      }
+
+      return [...flipped, id];
+    });
+  };
+
   return (
     <div
       className={styles.card}
-      onClick={() => {
-        if (props.flipped.length < 8) {
-          props.setFlipped((prev) => [...prev, props.id]);
-        }
-      }}
+      style={{ opacity: isSolved ? 0 : 1 }}
+      onClick={handleClick}
     >
-      {props.flipped.includes(props.id) ? (
-        <p className={styles.text}>{props.text}</p>
-      ) : (
-        ""
-      )}
+      {isFlipped && <Image src={src} alt={value} fill />}
     </div>
   );
-}
+};
